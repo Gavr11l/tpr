@@ -23,27 +23,13 @@ Data Stack size         : 256
 
 #include <mega8.h>
 
-// 1 Wire Bus interface functions
-#include <1wire.h>
-
-// DS1820 Temperature Sensor functions
-#include <ds18b20.h> 
-
-// Alphanumeric LCD functions
-#include <alcd.h>
+#include "ds18x20_v3.h"  
 #include "ds1307_twi.h"
-#include <stdio.h>
+#include "tpr.h"
+
+#include <alcd.h>
 #include <delay.h>
-
-
-char lcd_buffer[8];  // variable for format display number values 
-
-char display_buffer[17]; /* LCD display buffer for 1 line */
-unsigned char hour, minutes, sec; //часы, минуты, секунды
-unsigned char day, month, year, weekDay; //день, мес€ц, год
-unsigned char tempDigit[4];
-unsigned char devices;
-
+#include <stdio.h>
 
 
 // Declare your global variables here
@@ -140,12 +126,8 @@ SPCR=0x00;
 // TWI disabled
 TWCR=0x00;
 
-// 1 Wire Bus initialization
-// 1 Wire Data port: PORTC
-// 1 Wire Data bit: 0
-// Note: 1 Wire port settings are specified in the
-// Project|Configure|C Compiler|Libraries|1 Wire menu.
-devices = w1_init(); //ищим датчики
+// определить устройства (опросить датчики)
+devices=w1_search(0xf0,rom_code);
 
 
 // Alphanumeric LCD initialization
@@ -198,15 +180,9 @@ while (1)
               2000+year);
       lcd_puts(display_buffer);
         
-       if (devices > 0) {
-                    temp = ds18b20_temperature(0); //читаем температуру
-                    //temp=temp*10;
-                    if (temp > 1000) { //если датчик выдаЄт больше 1000
-                        temp = 4096 - temp; //отнимаем от данных 4096
-                        temp = -temp; //и ставим знак "минус"
-                    }
-}
-sprintf(lcd_buffer, " %.1f\xdfC", temp); 
+      
+
+
     lcd_gotoxy(8, 0);
     lcd_puts(lcd_buffer); 
 

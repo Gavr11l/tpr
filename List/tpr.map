@@ -1,13 +1,12 @@
 RAM Allocation
 Variable                                                          Address   Size
 --------------------------------------------------------------------------------
-__ds18b20_scratch_pad                                             0x0160       9
+__ds18x20_scratch_pad                                             0x0160       9
 lcd_buffer                                                        0x0169       8
 display_buffer                                                    0x0171      17
-temp                                                              0x0182       4
-_base_y                                                           0x0186       4
-_lcd_maxx                                                         0x018A       1
-_seed                                                             0x018B       4
+rom_code                                                          0x0182      36
+_base_y                                                           0x01A6       4
+_lcd_maxx                                                         0x01AA       1
 
 EEPROM Allocation
 Variable                                                          Address   Size
