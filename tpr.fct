@@ -1,0 +1,3 @@
+main DSTACK_USAGE:0 DSTACK_LEVEL:0 FILE:"tpr.c" LINE:37
+sprintf DSTACK_USAGE:14 DSTACK_LEVEL:14 FILE:"C:\cvavr2\lib\stdio.lib" LINE:1410
+_print DSTACK_USAGE:18 DSTACK_LEVEL:32 FILE:"C:\cvavr2\lib\stdio.lib" LINE:404
